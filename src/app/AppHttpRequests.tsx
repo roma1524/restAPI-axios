@@ -1,40 +1,21 @@
 import {type ChangeEvent, type CSSProperties, useEffect, useState} from 'react'
 import Checkbox from '@mui/material/Checkbox'
-import {CreateItemForm, EditableSpan} from "@/common/components";
-import {Todolist} from "@/features/todolists/api/todolistApi.types.ts";
-import {todolistApi} from "@/features/todolists/api/todolistApi.ts";
-
+import {CreateItemForm} from '@/common/components/CreateItemForm/CreateItemForm'
+import {EditableSpan} from '@/common/components/EditableSpan/EditableSpan'
 
 export const AppHttpRequests = () => {
-  const [todolists, setTodolists] = useState<Todolist[]>([])
+  const [todolists, setTodolists] = useState<any>([])
   const [tasks, setTasks] = useState<any>({})
 
   useEffect(() => {
-    todolistApi.getTodoLists()
-        .then(res => {
-          setTodolists(res.data)})
+    // get todolists
   }, [])
 
-  const createTodolist = (title: string) => {
-    todolistApi.createTodoList(title)
-        .then(res => {
-          const newTodo = res.data.data.item
-          setTodolists([newTodo, ...todolists])})
-  }
+  const createTodolist = (title: string) => {}
 
-  const deleteTodolist = (id: string) => {
-    todolistApi.deleteTodoList(id)
-        .then(() => {
-          setTodolists(todolists.filter(td => td.id !== id))
-          })
-  }
+  const deleteTodolist = (id: string) => {}
 
-  const changeTodolistTitle = (id: string, title: string) => {
-    todolistApi.changeTodolistTitle(id, title)
-        .then(() => {
-          setTodolists(todolists.map(td => td.id === id ? {...td, title} : td))
-        })
-  }
+  const changeTodolistTitle = (id: string, title: string) => {}
 
   const createTask = (todolistId: string, title: string) => {}
 
@@ -47,7 +28,7 @@ export const AppHttpRequests = () => {
   return (
       <div style={{margin: '20px'}}>
         <CreateItemForm onCreateItem={createTodolist}/>
-        {todolists.map((todolist) => (
+        {todolists.map((todolist: any) => (
             <div key={todolist.id} style={container}>
               <div>
                 <EditableSpan value={todolist.title}
