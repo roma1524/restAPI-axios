@@ -15,4 +15,7 @@ export const tasksApi = {
   changeTaskStatus(tdId: string, taskId: string, model: UpdateTaskModel) {
     return instance.put<BaseResponse<{ item: Task }>>(`/todo-lists/${tdId}/tasks/${taskId}`, model)
   },
+  changeTaskTitle(tdId: string, taskId: string, model: UpdateTaskModel) {
+    return instance.put<BaseResponse<{ item: Task }>>(`/todo-lists/${tdId}/tasks/${taskId}`, model)
+  },
 }
